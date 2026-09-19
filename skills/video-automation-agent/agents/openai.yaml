@@ -1,0 +1,4 @@
+interface:
+  display_name: "영상 자동화 에이전트"
+  short_description: "Tutor-T 영상 자동화를 한 문장으로 설치하고 시작·정지하기"
+  default_prompt: "Use $video-automation-agent: 내 환경에 영상 자동화 에이전트를 설치하고 실행해줘."

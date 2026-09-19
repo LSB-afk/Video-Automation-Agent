@@ -6,6 +6,30 @@ Tutor-T 강의를 실제로 재생하고, 보충영상과 다음 강의·주제 
 
 사용자가 로그인한 브라우저 안에서 실행됩니다. 일반 설치에는 Python, Hermes, LLM API 키가 필요하지 않습니다. 지원 사이트는 `https://tutor-t.thinkforbl.com/courses/<숫자>`입니다.
 
+## 한 문장으로 설치하고 실행하기
+
+Codex 또는 Hermes에 아래 스킬을 **처음 한 번 등록**하면, 이후에는 이렇게 말하면 됩니다.
+
+> 내 환경에 영상 자동화 에이전트를 설치하고 실행해줘.
+
+등록 방법은 Node.js 22+와 Git이 설치된 터미널에서 다음과 같습니다. 이미 내려받은 저장소가 있으면 그 폴더에서 마지막 명령만 실행합니다.
+
+```sh
+git clone https://github.com/LSB-afk/Video-Automation-Agent.git
+cd Video-Automation-Agent
+node app/scripts/install-skill.mjs --target all
+```
+
+`--target codex` 또는 `--target hermes`로 하나만 등록할 수도 있습니다. 이 명령은 스킬을 등록하며 Codex/Hermes 프로그램 자체를 설치하지는 않습니다. Codex는 `$CODEX_HOME/skills`(기본 `~/.codex/skills`), Hermes는 `$HERMES_HOME/skills`(기본 macOS/Linux `~/.hermes/skills`, Windows `%LOCALAPPDATA%/hermes/skills`)에 설치됩니다. **등록 후 새 대화를 시작**해 스킬 목록을 갱신하세요. 스킬을 아직 등록하지 않은 다른 사람의 에이전트는 위 문장만으로 이 저장소를 알아낼 수 없습니다.
+
+- **“영상 자동화 시작해줘”**: 필요한 실행 파일을 준비하고, 연결 가능한 현재 브라우저의 강의를 100% 목표 모드로 시작합니다.
+- **“영상 자동화 상태 알려줘”**: 실제 재생 상태와 사이트의 학습완료율을 확인합니다.
+- **“영상 자동화 멈춰줘”**: 현재 자동화를 중지합니다. 정지나 상태 확인을 위해 새로 설치·실행하지 않습니다.
+
+Aside는 공식 CLI로 연결하며, 다른 브라우저는 에이전트의 브라우저 연결 도구나 아래 사용자 스크립트/확장 프로그램을 사용합니다. **로그인·브라우저 권한·연결 도구가 필요한 단계까지 프롬프트만으로 생략되지는 않습니다.** 브라우저를 연결할 수 없으면 필요한 조치를 안내합니다. 과정이 여러 개면 대상을 확인합니다. 이미 실행 중인 자동화는 중복 시작하지 않습니다.
+
+스킬 폴더만 따로 배포해도 포함된 `scripts/bootstrap.mjs`가 저장소를 찾거나 내려받습니다. 로컬 `workspace.json`에는 저장소 경로만 기록하며 인증정보는 저장하지 않습니다. 저장소를 옮겼다면 새 위치에서 등록 명령을 다시 실행하거나 `VAA_WORKSPACE`를 지정하세요. 기존 체크아웃을 자동으로 갱신하거나 사용자 파일을 덮어쓰지는 않습니다.
+
 ## 빠른 설치
 
 1. 브라우저에 사용자 스크립트 매니저를 설치합니다. Chrome·Edge·Firefox 등은 [Tampermonkey](https://www.tampermonkey.net/) 또는 [Violentmonkey](https://violentmonkey.github.io/get-it/), Safari는 [Userscripts](https://github.com/quoid/userscripts)를 사용할 수 있습니다.
@@ -76,9 +100,9 @@ npm run package
 | `app/config/` | 브라우저 테스트 설정 |
 | `app/src/controller.js` | 재생, 상호작용, 다음 이동, 완료율 목표 제어 |
 | `app/src/panel.js` | 시작·정지·설정·상태 화면 |
-| `app/scripts/` | 빌드·패키징·검사·Aside 연결 |
+| `app/scripts/` | 스킬 등록·빌드·패키징·검사·Aside 연결 |
 | `app/tests/` | 실제 미디어 회귀 테스트와 배포 파일 검사 |
-| `skills/video-automation-agent/` | Hermes·Codex 등 에이전트에서 참고할 재사용 스킬 |
+| `skills/video-automation-agent/` | 한 문장 실행용 스킬·독립 설치 실행기·Codex 표시 정보 |
 | `docs/superpowers/` | 요구사항과 구현 계획 |
 
 JSON은 용도에 맞는 위치에 둡니다. npm 설정은 `app/`, 생성되는 확장 설정 `manifest.json`은 `app/.artifacts/dist/chromium/`과 `firefox/`, 실행 결과는 `app/.artifacts/test-results/`에 있습니다. `node_modules/`와 `.artifacts/`는 Git에 올리지 않습니다. 일반 사용자는 저장소의 개발 파일 대신 릴리스 설치 파일을 사용하면 됩니다.

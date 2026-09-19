@@ -8,6 +8,42 @@ supplementary clips and normal navigation controls, and can run until the site's
 course completion reaches 100%. No Python, Hermes runtime, or LLM API key is
 required for userscript or extension installation.
 
+## Start with one sentence
+
+Register the skill once in Codex or Hermes, then say:
+
+> Install and run the Video Automation Agent in my environment.
+
+The Korean invocation is **내 환경에 영상 자동화 에이전트를 설치하고 실행해줘.**
+With Node.js 22+ and Git installed:
+
+```sh
+git clone https://github.com/LSB-afk/Video-Automation-Agent.git
+cd Video-Automation-Agent
+node app/scripts/install-skill.mjs --target all
+```
+
+Use `--target codex` or `--target hermes` to register only one. This registers a
+skill; it does not install the host agent or configure its model access. Start a
+new agent conversation after registration. Codex uses `$CODEX_HOME/skills`
+(default `~/.codex/skills`); Hermes uses `$HERMES_HOME/skills` (default
+`~/.hermes/skills` on macOS/Linux, `%LOCALAPPDATA%/hermes/skills` on Windows).
+
+The skill can prepare its own checkout when copied independently. It reuses the
+user's authenticated course tab, preserves an already-running controller, and
+defaults to genuine 100% goal mode. Aside requires its official CLI; other
+browsers require an authorized browser connection or userscript/extension
+installation. Login, browser permissions, and an ambiguous choice of course may
+still need user input. The agent reports these blockers rather than claiming it
+started. An agent without this skill cannot infer this repository from that
+sentence alone.
+
+Ask **“Show video automation status”** or **“Stop video automation”** to inspect or
+stop an existing run without installing or starting a new one. If a checkout is
+moved, rerun the registration command there or set `VAA_WORKSPACE`. Registration
+stores only the local checkout path in `workspace.json`; it copies no credentials
+and does not overwrite an unrelated existing skill.
+
 ## Install
 
 1. Install [Tampermonkey](https://www.tampermonkey.net/) or

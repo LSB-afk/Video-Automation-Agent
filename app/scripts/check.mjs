@@ -10,7 +10,8 @@ async function walk(dir) {
     return entry.isDirectory() ? walk(path) : [path];
   }))).flat();
 }
-const files = (await Promise.all(['config', 'src', 'scripts', 'tests'].map(dir => walk(resolve(root, dir))))).flat();
+const files = (await Promise.all(['config', 'src', 'scripts', 'tests', '../skills/video-automation-agent/scripts']
+  .map(dir => walk(resolve(root, dir))))).flat();
 let count = 0;
 for (const path of files.filter(path => ['.js', '.mjs'].includes(extname(path)))) {
   const result = spawnSync(process.execPath, ['--check', path], { encoding: 'utf8' });

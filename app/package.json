@@ -9,6 +9,7 @@
     "node": ">=22"
   },
   "scripts": {
+    "install:skill": "node scripts/install-skill.mjs",
     "build": "node scripts/build.mjs",
     "package": "node scripts/package.mjs",
     "check": "node scripts/check.mjs",
