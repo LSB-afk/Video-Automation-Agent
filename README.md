@@ -68,7 +68,7 @@ npm test
 npm run package
 ```
 
-`app/.artifacts/dist/`에 빌드 결과, `app/.artifacts/release/`에 설치 파일을 생성합니다. 실제 짧은 합성 영상을 사용해 Chromium·Firefox·WebKit에서 재생·이동·보충영상·100% 종료를 검사합니다. CI는 Linux·macOS·Windows에서 같은 검사를 실행합니다. **엔진 테스트가 모든 브라우저 브랜드와 모바일 기기의 검증을 의미하지는 않습니다.** 최신 결과와 제한은 [호환성 문서](docs/compatibility.md)를 확인하세요.
+`app/.artifacts/dist/`에 빌드 결과, `app/.artifacts/release/`에 설치 파일을 생성합니다. 실제 짧은 합성 영상을 사용해 Chromium·Firefox·WebKit에서 재생·이동·보충영상·100% 종료를 검사합니다. CI는 Linux·macOS·Windows에서 검사를 실행하며, upstream 제약이 있는 Windows WebKit 영상 테스트는 제외합니다. **엔진 테스트가 모든 브라우저 브랜드와 모바일 기기의 검증을 의미하지는 않습니다.** 최신 결과와 제한은 [호환성 문서](docs/compatibility.md)를 확인하세요.
 
 | 경로 | 역할 |
 | --- | --- |

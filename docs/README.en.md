@@ -71,7 +71,8 @@ npm run package
 
 Builds go to `app/.artifacts/dist/`; installation packages go to `app/.artifacts/release/`. The runtime is plain
 JavaScript without external dependencies. Tests use original tiny media fixtures
-and Chromium, Firefox, and WebKit. CI runs on Linux, macOS, and Windows. Engine tests
+and Chromium, Firefox, and WebKit. CI runs on Linux, macOS, and Windows; WebKit
+media tests are excluded on Windows hosted CI for a documented upstream limitation. Engine tests
 do not certify every browser brand, manager, or mobile device. See
 [compatibility](compatibility.md), [troubleshooting](troubleshooting.md), and
 [contributing](../CONTRIBUTING.md). Licensed under [MIT](../LICENSE).

@@ -35,13 +35,15 @@ Safari Userscripts는 App Store에서 설치합니다. 공식 README 기준 macO
 
 | 검증 대상 | 현재 결과 | 이 결과로 확인할 수 없는 것 |
 | --- | --- | --- |
-| Playwright Chromium | macOS에서 49개 통과. 실제 unpacked 확장 로딩 포함 | Chrome·Edge·Brave·Opera 및 각 매니저의 실제 설치·재생 |
-| Playwright Firefox | macOS에서 공통 동작 48개 통과. 확장 설치 테스트 제외 | 일반 Firefox 배포판과 매니저의 실제 설치·재생 |
-| Playwright WebKit | macOS에서 공통 동작 48개 통과. 확장 설치 테스트 제외 | 실제 Safari, iPhone/iPad, Safari 매니저의 실제 설치·재생 |
+| Playwright Chromium | macOS에서 50개 통과. 실제 unpacked 확장 로딩 포함 | Chrome·Edge·Brave·Opera 및 각 매니저의 실제 설치·재생 |
+| Playwright Firefox | macOS에서 공통 동작 49개 통과. 확장 설치 테스트 제외 | 일반 Firefox 배포판과 매니저의 실제 설치·재생 |
+| Playwright WebKit | macOS에서 공통 동작 49개 통과. 확장 설치 테스트 제외 | 실제 Safari, iPhone/iPad, Safari 매니저의 실제 설치·재생 |
 
-2026-09-19 로컬 검증: Node.js 24.11.1, Playwright 1.63.0. 잠금 파일로 새로 설치한 뒤 브라우저 테스트 **145개 통과·2개 제외**, Node 테스트 **12개 통과**, 구문·경로 검사와 설치 파일 패키징 통과. 제외된 2개는 Chromium 전용 확장 로딩 테스트의 Firefox·WebKit 실행입니다. 운영체제별 자동 실행 결과는 [GitHub Actions](https://github.com/LSB-afk/Video-Automation-Agent/actions/workflows/ci.yml)에서 확인할 수 있습니다.
+2026-09-19 로컬 검증: Node.js 24.11.1, Playwright 1.63.0. 잠금 파일로 새로 설치한 뒤 브라우저 테스트 **148개 통과·2개 제외**, Node 테스트 **12개 통과**, 구문·경로 검사와 설치 파일 패키징 통과. 제외된 2개는 Chromium 전용 확장 로딩 테스트의 Firefox·WebKit 실행입니다. 운영체제별 자동 실행 결과는 [GitHub Actions](https://github.com/LSB-afk/Video-Automation-Agent/actions/workflows/ci.yml)에서 확인할 수 있습니다.
 
 Aside 1.26.916.1741에서는 새 배포본의 CLI로 기존 실행을 교체하고 `until_complete: true`, `running: true`, 사이트 완료율 읽기와 실제 재생 시간 증가를 확인했습니다. 전 과정이 100%에 도달하는 장시간 실사용 검증은 진행 중이며, 100% 종료 조건은 합성 강의 테스트에서 검증했습니다.
+
+Windows hosted CI에서는 WebKit의 실제 영상 테스트 40개를 제외하고 패널 테스트 9개를 유지합니다. 이 조합은 영상 로딩 단계에서 실패했으며, Playwright 1.63.0 upstream도 Windows Server의 Media Pack 문제로 동일 조합을 제외합니다. macOS·Linux에서는 WebKit 영상 테스트를 계속 실행합니다. 모든 Windows 환경에서 WebKit 재생이 불가능하다는 뜻은 아닙니다. [해당 버전의 공식 테스트와 제외 사유](https://github.com/microsoft/playwright/blob/v1.63.0/tests/library/capabilities.spec.ts#L62-L110)
 
 Playwright Firefox와 WebKit은 패치된 테스트 빌드입니다. **WebKit 테스트 통과를 Safari 검증 완료로 표기하지 않습니다.** 영상 코덱은 운영체제별로 다르며, Playwright는 Safari에 가까운 영상 테스트에 macOS WebKit을 권장합니다. Chrome·Edge의 코덱 동작은 해당 공식 브라우저 채널에서도 확인해야 합니다. [Playwright 브라우저·미디어 문서](https://playwright.dev/docs/browsers)
 

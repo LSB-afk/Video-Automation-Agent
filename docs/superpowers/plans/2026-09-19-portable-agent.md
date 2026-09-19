@@ -32,7 +32,7 @@ building and publishing to the specified repository; proceed through verificatio
 - [x] **Workspace cleanup.** Group npm JSON and executable code under `app/`,
   put test configuration in `app/config/`, and ignore generated `.artifacts/`.
 - [x] **Local validation.** Clean install, syntax/portability checks, 12 Node tests,
-  and 145 browser tests passed; 2 Chromium-only extension cases excluded on other
+  and 148 browser tests passed; 2 Chromium-only extension cases excluded on other
   engines. Review privacy and release contents.
 - [ ] **Publication.** Commit with Lore trailers, push main, publish versioned
   release assets, inspect CI, and fix actionable failures before reporting the
