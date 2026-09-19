@@ -41,6 +41,8 @@ Safari Userscripts는 App Store에서 설치합니다. 공식 README 기준 macO
 
 2026-09-19 로컬 검증: Node.js 24.11.1, Playwright 1.63.0. 잠금 파일로 새로 설치한 뒤 브라우저 테스트 **148개 통과·2개 제외**, Node 테스트 **12개 통과**, 구문·경로 검사와 설치 파일 패키징 통과. 제외된 2개는 Chromium 전용 확장 로딩 테스트의 Firefox·WebKit 실행입니다. 운영체제별 자동 실행 결과는 [GitHub Actions](https://github.com/LSB-afk/Video-Automation-Agent/actions/workflows/ci.yml)에서 확인할 수 있습니다.
 
+[최종 GitHub Actions 실행](https://github.com/LSB-afk/Video-Automation-Agent/actions/runs/35431780937)은 세 운영체제에서 모두 성공했습니다. Node.js 22 환경에서 macOS·Linux 각각 브라우저 테스트 148개, Windows 108개가 통과했고, 각 환경의 Node 테스트 12개도 통과했습니다. Windows의 알려진 WebKit 미디어 제외 40개와 각 환경의 확장 설치 제외 2개는 통과 수에 포함하지 않았습니다.
+
 Aside 1.26.916.1741에서는 새 배포본의 CLI로 기존 실행을 교체하고 `until_complete: true`, `running: true`, 사이트 완료율 읽기와 실제 재생 시간 증가를 확인했습니다. 전 과정이 100%에 도달하는 장시간 실사용 검증은 진행 중이며, 100% 종료 조건은 합성 강의 테스트에서 검증했습니다.
 
 Windows hosted CI에서는 WebKit의 실제 영상 테스트 40개를 제외하고 패널 테스트 9개를 유지합니다. 이 조합은 영상 로딩 단계에서 실패했으며, Playwright 1.63.0 upstream도 Windows Server의 Media Pack 문제로 동일 조합을 제외합니다. macOS·Linux에서는 WebKit 영상 테스트를 계속 실행합니다. 모든 Windows 환경에서 WebKit 재생이 불가능하다는 뜻은 아닙니다. [해당 버전의 공식 테스트와 제외 사유](https://github.com/microsoft/playwright/blob/v1.63.0/tests/library/capabilities.spec.ts#L62-L110)

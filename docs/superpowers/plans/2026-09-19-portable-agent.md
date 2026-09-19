@@ -34,7 +34,7 @@ building and publishing to the specified repository; proceed through verificatio
 - [x] **Local validation.** Clean install, syntax/portability checks, 12 Node tests,
   and 148 browser tests passed; 2 Chromium-only extension cases excluded on other
   engines. Review privacy and release contents.
-- [ ] **Publication.** Commit with Lore trailers, push main, publish versioned
+- [x] **Publication.** Commit with Lore trailers, push main, publish versioned
   release assets, inspect CI, and fix actionable failures before reporting the
   supported/untested matrix.
 
@@ -51,3 +51,17 @@ npm test
 
 Completion requires the public source and installation packages to exist and
 fresh test evidence to support the browser compatibility table.
+
+## Delivery evidence
+
+- Release: https://github.com/LSB-afk/Video-Automation-Agent/releases/tag/v0.1.0
+- Validated source: `e1571736af91ebd82beaecf910aafab9828d8b11`.
+- CI: https://github.com/LSB-afk/Video-Automation-Agent/actions/runs/35431780937
+- macOS/Linux: 148 browser cases passed each; Windows: 108 passed. All three
+  environments passed 12 Node tests. Windows hosted WebKit media is explicitly
+  excluded per the matching upstream limitation; its panel tests remain enabled.
+- New live Aside controller advanced to the next topic, played its supplementary
+  video, and resumed the main video in goal mode. A full live 100% run is ongoing.
+- Windows LF checkout and same-source replacement-media regressions were fixed
+  and verified before publication. Generated packages were downloaded back from
+  GitHub and compared byte-for-byte with the local build.
