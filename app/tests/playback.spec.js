@@ -66,6 +66,34 @@ test('manual pause remains paused on following ticks', async ({ page }) => {
   expect(await page.locator(mainSelector).evaluate(video => video.paused)).toBe(true);
 });
 
+test('a paused replacement video with the same lesson and source starts once', async ({ page }) => {
+  await page.evaluate(() => {
+    window.originalVideo = document.querySelector('.cv-video-player > video');
+    window.originalSource = window.originalVideo.getAttribute('src');
+    window.playClicks = 0;
+    document.querySelector('.cv-video-control-btn').onclick = () => {
+      window.playClicks++;
+      const video = document.querySelector('.cv-video-player > video');
+      if (window.playClicks === 1) {
+        video.replaceWith(video.cloneNode(true));
+        return;
+      }
+      return video.paused ? video.play() : video.pause();
+    };
+  });
+  await step(page);
+  await page.waitForFunction(() => document.querySelector('.cv-video-player > video').readyState >= 2);
+  expect(await page.evaluate(() => document.querySelector('.cv-video-player > video') !== window.originalVideo)).toBe(true);
+  expect(await page.locator(mainSelector).getAttribute('src')).toBe(await page.evaluate(() => window.originalSource));
+  expect(await page.locator(mainSelector).evaluate(video => video.paused)).toBe(true);
+  await tickUntil(page, () => isPlaying(page));
+  expect(await page.evaluate(() => window.playClicks)).toBe(2);
+  expect(await nextClicks(page)).toBe(0);
+  await page.locator(mainSelector).evaluate(video => video.pause());
+  expect((await step(page)).status).toBe('paused');
+  expect(await page.evaluate(() => window.playClicks)).toBe(2);
+});
+
 test('an unrelated ended clip cannot complete the main lecture', async ({ page }) => {
   await page.evaluate(() => {
     const video = document.createElement('video');

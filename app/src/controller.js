@@ -15,6 +15,7 @@
     if (typeof untilComplete !== 'boolean') throw new Error('untilComplete must be a boolean');
     let timer = null, active = false, deadline = 0;
     let startedKey = null, advancedKey = null, advancedAt = 0;
+    let observedVideo = null;
     let endedKey = null, endedAt = 0;
     let textKey = null, textSeenAt = 0;
     let reviewing = false;
@@ -119,6 +120,13 @@
       const videos = [...document.querySelectorAll('.cv-video-player > video')].filter(v => !v.srcObject);
       const video = videos.length === 1 ? videos[0] : null;
       const player = video?.parentElement;
+      // A site rerender can replace a paused media element without changing
+      // the lesson or source. A click on the detached element did not start
+      // this new one; manual pauses still belong to the same element.
+      if (video && video !== observedVideo) {
+        observedVideo = video;
+        startedKey = null;
+      }
       const progress = courseProgress();
       const data = {
         lesson: item?.querySelector('.cv-curriculum-item-title')?.textContent.trim() || '',
@@ -293,6 +301,7 @@
       if (active) return { ...latest };
       active = true;
       startedKey = null;
+      observedVideo = null;
       advancedKey = null;
       endedKey = null;
       reviewing = false;
