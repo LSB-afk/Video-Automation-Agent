@@ -1,0 +1,25 @@
+name: Playback or installation problem
+description: Report a reproducible issue without sharing login information.
+title: "[Bug] "
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Agent version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser, operating system, and installation method
+      placeholder: Firefox / Windows / Violentmonkey userscript
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps, expected behavior, and actual behavior
+      description: Include the panel status. Remove names and private course content from screenshots. Do not post cookies, passwords, browser profiles, or tokens.
+    validations:
+      required: true

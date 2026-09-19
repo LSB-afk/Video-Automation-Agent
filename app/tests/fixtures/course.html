@@ -1,0 +1,40 @@
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  body { margin: 16px; font-family: sans-serif; }
+  video { width: 160px; height: 90px; }
+  button { min-width: 90px; min-height: 32px; }
+</style>
+<div class="cv-curriculum-item is-active">
+  <span class="cv-curriculum-status-icon"></span>
+  <span class="cv-curriculum-item-title">First</span>
+</div>
+<div class="cv-video-player">
+  <div class="cv-video-player-controls">
+    <div class="cv-video-controls-left">
+      <button class="cv-video-control-btn">Play</button>
+    </div>
+  </div>
+  <video muted playsinline preload="auto"></video>
+</div>
+<button class="cv-next-chapter-btn">Next</button>
+<script>
+  window.nextClicks = 0;
+  window.nativeEnds = 0;
+  const main = document.querySelector('.cv-video-player > video');
+  const format = main.canPlayType('video/mp4; codecs="avc1.42E01E"') ? 'mp4' : 'webm';
+  window.firstClip = `/fixtures/clip.${format}?lesson=first`;
+  window.secondClip = `/fixtures/clip.${format}?lesson=second`;
+  main.src = firstClip;
+  main.onended = () => {
+    window.nativeEnds++;
+    document.querySelector('.cv-curriculum-item.is-active .cv-curriculum-status-icon')?.classList.add('is-completed');
+  };
+  document.querySelector('.cv-video-control-btn').onclick = () => main.paused ? main.play() : main.pause();
+  document.querySelector('.cv-next-chapter-btn').onclick = () => {
+    window.nextClicks++;
+    document.querySelector('.cv-curriculum-status-icon').classList.remove('is-completed');
+    document.querySelector('.cv-curriculum-item-title').textContent = 'Second';
+    main.src = secondClip;
+  };
+</script>
